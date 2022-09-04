@@ -1,0 +1,75 @@
+<div class="container">
+  <div
+    *ngIf="isLoading"
+    class="vh-100 d-flex justify-content-center align-items-center"
+  >
+    <i class="fas fa-spinner fa-spin fs-1 text-light"></i>
+  </div>
+  <!-- search input  -->
+  <div *ngIf="!isLoading" class="d-flex py-3 justify-content-center">
+    <input
+      [(ngModel)]="searchTerm"
+      type="text"
+      class="form-control bg-transparent w-50 text-center border-1 text-light"
+      placeholder="Search By Name"
+    />
+  </div>
+
+  <!-- Movies -->
+  <div *ngIf="!isLoading" class="row py-3 justify-content-center">
+    <div *ngFor="let tv of tvs | search: searchTerm" class="col-md-3 py-3">
+      <a [routerLink]="['/details', 'tv', tv.id]">
+        <img
+          class="w-100"
+          [src]="
+            tv.poster_path
+              ? _TrendingService.imgPrefix + tv.poster_path
+              : './../../assets/images/images.jpg'
+          "
+          alt=""
+        />
+        <h3 class="h6 mb-2 py-2">{{ tv.original_name }}</h3>
+        <p class="text-muted">
+          {{ tv.overview | seemore: 20 }}
+        </p>
+      </a>
+    </div>
+  </div>
+
+  <!-- pagination -->
+  <div *ngIf="!isLoading" class="py-5 d-flex justify-content-center">
+    <nav aria-label="...">
+      <ul class="pagination pagination-sm">
+        <li class="page-item">
+          <a
+            class="page-link bg-transparent p-2 fs-5"
+            aria-label="Previous"
+            role="button"
+            (click)="previous()"
+          >
+            &laquo;
+          </a>
+        </li>
+
+        <li
+          *ngFor="let page of pages; index as i"
+          (click)="paginate(i + 1)"
+          class="page-item"
+        >
+          <a class="page-link bg-transparent p-2 fs-5" role="button">{{
+            i + 1
+          }}</a>
+        </li>
+        <li class="page-item" (click)="next()">
+          <a
+            class="page-link bg-transparent p-2 fs-5"
+            role="button"
+            aria-label="Next"
+          >
+            &raquo;
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

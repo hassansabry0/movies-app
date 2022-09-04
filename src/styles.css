@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+html,
+body {
+  background-color: #131722;
+  color: aliceblue;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+a {
+  color: aliceblue;
+  text-decoration: none;
+}
+a:hover {
+  color: aliceblue;
+}
+.bdr {
+  height: 1px;
+  background-color: #a8a8a83d;
+}
+
+header {
+  background-image: url(./assets/images/header.webp);
+  background-position: center center;
+  background-size: cover;
+  height: calc(100vh - 56px);
+}
+
+.profile-nav {
+  width: 40px;
+  height: 40px;
+}
+.profile-page {
+  width: 200px;
+  height: 200px;
+}
+.footer {
+  height: 250px;
+}

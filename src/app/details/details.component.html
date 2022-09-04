@@ -1,0 +1,83 @@
+<div class="container">
+  <div
+    *ngIf="isLoading"
+    class="vh-100 d-flex justify-content-center align-items-center"
+  >
+    <i class="fas fa-spinner fa-spin fs-1 text-light"></i>
+  </div>
+  <div *ngIf="!isLoading" class="row py-5">
+    <div class="col-md-4">
+      <img
+        class="w-100"
+        [src]="
+          movieDetails
+            ? _TrendingService.imgPrefix + movieDetails?.poster_path
+            : tvDetails
+            ? _TrendingService.imgPrefix + tvDetails?.poster_path
+            : personDetails
+            ? _TrendingService.imgPrefix + personDetails.profile_path
+            : './../assets/images/images.jpg'
+        "
+        alt=""
+      />
+    </div>
+    <div class="col-md-8">
+      <h2>
+        {{
+          movieDetails
+            ? movieDetails?.original_title
+            : tvDetails
+            ? tvDetails?.original_name
+            : personDetails
+            ? personDetails.name
+            : ""
+        }}
+      </h2>
+      <p class="py-3">
+        {{
+          movieDetails
+            ? movieDetails.overview
+            : tvDetails
+            ? tvDetails.overview
+            : personDetails
+            ? personDetails.biography
+            : ""
+        }}
+      </p>
+      <ul>
+        <li>
+          Popularity:
+          {{
+            movieDetails
+              ? movieDetails?.popularity
+              : tvDetails
+              ? tvDetails?.popularity
+              : personDetails
+              ? personDetails.popularity
+              : ""
+          }}
+        </li>
+        <li *ngIf="movieDetails || tvDetails">
+          Vote:
+          {{
+            movieDetails ? movieDetails?.vote_average : tvDetails?.vote_average
+          }}
+        </li>
+        <li *ngIf="movieDetails || tvDetails">
+          Vote Count:
+          {{ movieDetails ? movieDetails?.vote_count : tvDetails?.vote_count }}
+        </li>
+        <li *ngIf="movieDetails">
+          Rate: {{ movieDetails ? movieDetails.imdb_id : "" }}
+        </li>
+        <li *ngIf="personDetails">
+          Birthday: {{ personDetails.birthday }} in
+          {{ personDetails.place_of_birth }}
+        </li>
+        <li *ngIf="personDetails">
+          Hometown: {{ personDetails.place_of_birth }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

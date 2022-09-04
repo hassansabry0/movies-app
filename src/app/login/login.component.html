@@ -1,0 +1,103 @@
+<div class="container">
+  <h2 class="py-2 text-center">Login</h2>
+  <!-- error message from Api -->
+  <div
+    *ngIf="errorMessage"
+    class="text-danger my-3 text-center bg-white p-2 rounded-2"
+  >
+    {{ errorMessage | json }}
+  </div>
+  <div class="w-75 mx-auto">
+    <form (ngSubmit)="submitLoginForm(loginForm)" [formGroup]="loginForm">
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          id="email"
+          [ngClass]="{
+            'form-control': true,
+            'is-valid':
+              !loginForm.get('email')?.errors &&
+              loginForm.get('email')?.touched,
+            'is-invalid':
+              loginForm.get('email')?.errors && loginForm.get('email')?.touched
+          }"
+        />
+        <!-- valid email -->
+        <div *ngIf="!loginForm.get('email')?.errors" class="valid-feedback">
+          Looks good!
+        </div>
+        <!-- invalid email -->
+        <div
+          *ngIf="
+            loginForm.get('email')?.errors && loginForm.get('email')?.touched
+          "
+          class="form-text"
+        >
+          <p
+            *ngIf="loginForm.get('email')?.getError('required')"
+            class="text-danger p-0"
+          >
+            Required
+          </p>
+          <p
+            *ngIf="loginForm.get('email')?.getError('pattern')"
+            class="text-danger p-0"
+          >
+            Invalid email
+          </p>
+        </div>
+      </div>
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          id="password"
+          [ngClass]="{
+            'form-control': true,
+            'is-valid':
+              !loginForm.get('password')?.errors &&
+              loginForm.get('password')?.touched,
+            'is-invalid':
+              loginForm.get('password')?.errors &&
+              loginForm.get('password')?.touched
+          }"
+        />
+        <!-- valid password -->
+        <div *ngIf="!loginForm.get('password')?.errors" class="valid-feedback">
+          Looks good!
+        </div>
+        <!-- invalid password -->
+        <div
+          *ngIf="
+            loginForm.get('password')?.errors &&
+            loginForm.get('password')?.touched
+          "
+          class="form-text"
+        >
+          <p
+            *ngIf="loginForm.get('password')?.getError('required')"
+            class="text-danger p-0"
+          >
+            Required
+          </p>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary mb-3"
+        [disabled]="loginForm.invalid"
+      >
+        <span [ngSwitch]="isLoading">
+          <i *ngSwitchCase="true" class="fas fa-spinner fa-spin"></i>
+          <span *ngSwitchCase="false">Login</span>
+          <span *ngSwitchDefault>Login</span>
+        </span>
+      </button>
+    </form>
+  </div>
+</div>

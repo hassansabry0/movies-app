@@ -1,0 +1,29 @@
+<div class="container">
+  <div
+    *ngIf="isLoading"
+    class="vh-100 d-flex justify-content-center align-items-center"
+  >
+    <i class="fas fa-spinner fa-spin fs-1 text-light"></i>
+  </div>
+
+  <!-- people -->
+  <div *ngIf="!isLoading" class="row py-3 justify-content-center">
+    <div *ngFor="let person of persons" class="col-md-3 py-3">
+      <a [routerLink]="['/details', 'person', person.id]">
+        <img
+          class="w-100"
+          [src]="
+            person.profile_path
+              ? _TrendingService.imgPrefix + person.profile_path
+              : './../../assets/images/images.jpg'
+          "
+          alt=""
+        />
+        <h3 class="h6 mb-2 py-2">{{ person.name }}</h3>
+        <p class="text-muted">
+          <!-- {{ person.biography | seemore: 20 }} -->
+        </p>
+      </a>
+    </div>
+  </div>
+</div>

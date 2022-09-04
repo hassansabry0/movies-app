@@ -1,0 +1,121 @@
+<!-- landing page -->
+
+<header class="d-flex align-items-end">
+  <div class="container">
+    <div
+      *ngIf="isLoading"
+      class="vh-100 d-flex justify-content-center align-items-end"
+    >
+      <i class="fas fa-spinner fa-spin fs-1 text-light"></i>
+    </div>
+    <owl-carousel-o *ngIf="!isLoading" [options]="customOptions">
+      <ng-container *ngFor="let movie of movies">
+        <ng-template carouselSlide [id]="movie.id">
+          <img [src]="_TrendingService.imgPrefix + movie.poster_path" alt="" />
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </div>
+</header>
+
+<!-- Movies -->
+<div class="container">
+  <div
+    *ngIf="isLoading"
+    class="vh-100 d-flex justify-content-center align-items-end"
+  >
+    <i class="fas fa-spinner fa-spin fs-1 text-light"></i>
+  </div>
+  <div *ngIf="!isLoading" class="row">
+    <div class="col-md-4 p-3 d-flex align-items-center justify-content-center">
+      <div>
+        <!-- for border -->
+        <div class="bdr mb-3 w-50"></div>
+        <h2>
+          Trending <br />
+          Movies <br />
+          To Watch Right Now
+        </h2>
+        <p class="=py-2">most watched movies by days</p>
+        <div class="bdr mt-3"></div>
+      </div>
+    </div>
+
+    <div *ngFor="let movie of movies" class="col-md-2 py-3">
+      <a [routerLink]="['/details', movie.media_type, movie.id]">
+        <img
+          class="w-100"
+          [src]="
+            movie.poster_path
+              ? _TrendingService.imgPrefix + movie.poster_path
+              : './../../assets/images/images.jpg'
+          "
+          alt=""
+        />
+        <h3 class="h6 pt-2">{{ movie.title }}</h3>
+      </a>
+    </div>
+  </div>
+
+  <!-- Tv -->
+
+  <div *ngIf="!isLoading" class="row py-5">
+    <div class="col-md-4 p-3 d-flex align-items-center justify-content-center">
+      <div>
+        <div class="bdr mb-3 w-50"></div>
+        <h2>
+          Trending <br />
+          Tv <br />
+          To Watch Right Now
+        </h2>
+        <p class="=py-2">most watched tv by days</p>
+        <div class="bdr mt-3"></div>
+      </div>
+    </div>
+    <div *ngFor="let tv of tv" class="col-md-2 py-3">
+      <a [routerLink]="['/details', tv.media_type, tv.id]">
+        <img
+          class="w-100"
+          [src]="
+            tv.poster_path
+              ? _TrendingService.imgPrefix + tv.poster_path
+              : './../../assets/images/images.jpg'
+          "
+          alt=""
+        />
+        <h3 class="h6 pt-2">{{ tv.name }}</h3>
+      </a>
+    </div>
+  </div>
+
+  <!-- people -->
+
+  <div *ngIf="!isLoading" class="row">
+    <div class="col-md-4 p-3 d-flex align-items-center justify-content-center">
+      <div>
+        <div class="bdr mb-3 w-50"></div>
+        <h2>
+          Trending <br />
+          Person <br />
+          To Watch Right Now
+        </h2>
+        <p class="=py-2">most watched person by days</p>
+        <div class="bdr mt-3"></div>
+      </div>
+    </div>
+    <div *ngFor="let person of people" class="col-md-2 py-3">
+      <a [routerLink]="['/details', person.media_type, person.id]">
+        <img
+          class="w-100"
+          [src]="
+            person.profile_path
+              ? _TrendingService.imgPrefix + person.profile_path
+              : './../../assets/images/images.jpg'
+          "
+          alt=""
+        />
+        <h3 class="h6 pt-2">{{ person.name }}</h3>
+      </a>
+    </div>
+  </div>
+</div>

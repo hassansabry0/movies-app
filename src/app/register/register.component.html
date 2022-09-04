@@ -1,0 +1,279 @@
+<div class="container">
+  <h2 class="py-2 text-center">Register</h2>
+  <!-- error message from Api -->
+  <div
+    *ngIf="errorMessage"
+    class="text-danger my-3 text-center bg-white p-2 rounded-2"
+  >
+    {{ errorMessage | json }}
+  </div>
+  <div class="w-75 mx-auto">
+    <form
+      (ngSubmit)="submitRegisterForm(registerForm)"
+      [formGroup]="registerForm"
+    >
+      <!-- first Name -->
+      <div class="mb-3">
+        <label for="first_name" class="form-label"> first_name</label>
+        <input
+          id="first_name"
+          aria-describedby="first_name_help"
+          formControlName="first_name"
+          type="text"
+          trim
+          [ngClass]="{
+            'form-control': true,
+            'is-invalid':
+              registerForm.get('first_name')?.errors &&
+              registerForm.get('first_name')?.touched,
+            'is-valid':
+              !registerForm.get('first_name')?.errors &&
+              registerForm.get('first_name')?.touched
+          }"
+        />
+        <!-- valid first first_name -->
+        <div
+          *ngIf="!registerForm.get('first_name')?.errors"
+          class="valid-feedback"
+        >
+          Looks good!
+        </div>
+        <!-- invalid first first_name -->
+        <div
+          *ngIf="
+            registerForm.get('first_name')?.errors &&
+            registerForm.get('first_name')?.touched
+          "
+          id="first_name_help"
+          class="form-text"
+        >
+          <p
+            *ngIf="registerForm.get('first_name')?.getError('required')"
+            class="text-danger p-0"
+          >
+            Required
+          </p>
+          <p
+            *ngIf="registerForm.get('first_name')?.getError('minlength')"
+            class="text-danger p-0"
+          >
+            First first_name must be greater than 3 characters
+          </p>
+          <p
+            *ngIf="registerForm.get('first_name')?.getError('maxlength')"
+            class="text-danger p-0"
+          >
+            First name must be less than 15 characters
+          </p>
+        </div>
+      </div>
+      <!-- Last Name -->
+      <div class="mb-3">
+        <label for="last_name" class="form-label">Last Name</label>
+        <input
+          type="text "
+          formControlName="last_name"
+          id="last_name"
+          trim
+          [ngClass]="{
+            'form-control': true,
+            'is-valid':
+              !registerForm.get('last_name')?.errors &&
+              registerForm.get('last_name')?.touched,
+            'is-invalid':
+              registerForm.get('last_name')?.errors &&
+              registerForm.get('last_name')?.touched
+          }"
+        />
+        <!-- valid last name -->
+        <div
+          *ngIf="!registerForm.get('last_name')?.errors"
+          class="valid-feedback"
+        >
+          Looks good!
+        </div>
+        <!-- invalid last name -->
+        <div
+          *ngIf="
+            registerForm.get('last_name')?.errors &&
+            registerForm.get('last_name')?.touched
+          "
+          id="last_name_help"
+          class="form-text"
+        >
+          <p
+            *ngIf="registerForm.get('last_name')?.getError('required')"
+            class="text-danger p-0"
+          >
+            Required
+          </p>
+          <p
+            *ngIf="registerForm.get('last_name')?.getError('minlength')"
+            class="text-danger p-0"
+          >
+            Last name must be greater than 3 characters
+          </p>
+          <p
+            *ngIf="registerForm.get('last_name')?.getError('maxlength')"
+            class="text-danger p-0"
+          >
+            Last name must be less than 15 characters
+          </p>
+        </div>
+      </div>
+      <!-- Age -->
+      <div class="mb-3">
+        <label for="age" class="form-label">Age</label>
+        <input
+          type="number"
+          formControlName="age"
+          id="age"
+          [ngClass]="{
+            'form-control': true,
+            'is-valid':
+              !registerForm.get('age')?.errors &&
+              registerForm.get('age')?.touched,
+            'is-invalid':
+              registerForm.get('age')?.errors &&
+              registerForm.get('age')?.touched
+          }"
+        />
+        <!-- valid age -->
+        <div *ngIf="!registerForm.get('age')?.errors" class="valid-feedback">
+          Looks good!
+        </div>
+
+        <!-- invalid age -->
+        <div
+          *ngIf="
+            registerForm.get('age')?.errors && registerForm.get('age')?.touched
+          "
+          class="form-text"
+        >
+          <p
+            *ngIf="registerForm.get('age')?.getError('required')"
+            class="text-danger p-0"
+          >
+            Required
+          </p>
+          <p
+            *ngIf="registerForm.get('age')?.getError('min')"
+            class="text-danger p-0"
+          >
+            Age must be greater than 16 year
+          </p>
+          <p
+            *ngIf="registerForm.get('age')?.getError('max')"
+            class="text-danger p-0"
+          >
+            Age must be less than 80 year
+          </p>
+        </div>
+      </div>
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          id="email"
+          trim
+          [ngClass]="{
+            'form-control': true,
+            'is-valid':
+              !registerForm.get('email')?.errors &&
+              registerForm.get('email')?.touched,
+            'is-invalid':
+              registerForm.get('email')?.errors &&
+              registerForm.get('email')?.touched
+          }"
+        />
+        <!-- valid email -->
+        <div *ngIf="!registerForm.get('email')?.errors" class="valid-feedback">
+          Looks good!
+        </div>
+        <!-- invalid email -->
+        <div
+          *ngIf="
+            registerForm.get('email')?.errors &&
+            registerForm.get('email')?.touched
+          "
+          class="form-text"
+        >
+          <p
+            *ngIf="registerForm.get('email')?.getError('required')"
+            class="text-danger p-0"
+          >
+            Required
+          </p>
+          <p
+            *ngIf="registerForm.get('email')?.getError('pattern')"
+            class="text-danger p-0"
+          >
+            Invalid email
+          </p>
+        </div>
+      </div>
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          id="password"
+          trim
+          [ngClass]="{
+            'form-control': true,
+            'is-valid':
+              !registerForm.get('password')?.errors &&
+              registerForm.get('password')?.touched,
+            'is-invalid':
+              registerForm.get('password')?.errors &&
+              registerForm.get('password')?.touched
+          }"
+        />
+        <!-- valid password -->
+        <div
+          *ngIf="!registerForm.get('password')?.errors"
+          class="valid-feedback"
+        >
+          Looks good!
+        </div>
+        <!-- invalid password -->
+        <div
+          *ngIf="
+            registerForm.get('password')?.errors &&
+            registerForm.get('password')?.touched
+          "
+          class="form-text"
+        >
+          <p
+            *ngIf="registerForm.get('password')?.getError('required')"
+            class="text-danger p-0"
+          >
+            Required
+          </p>
+          <p
+            *ngIf="registerForm.get('password')?.getError('pattern')"
+            class="text-danger p-0"
+          >
+            Password must have capital letter, small letter, special characters
+            and number at least 8 characters
+          </p>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary mb-3"
+        [disabled]="registerForm.invalid"
+      >
+        <span [ngSwitch]="isLoading">
+          <i *ngSwitchCase="true" class="fas fa-spinner fa-spin"></i>
+          <span *ngSwitchCase="false">Register</span>
+          <span *ngSwitchDefault>Register</span>
+        </span>
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-lg bg-transparent navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="isLogin ? 'home' : 'login'">Noxe</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="home"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="movies"
+            >Movies</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="tv">Tv</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="people"
+            >People</a
+          >
+        </li>
+      </ul>
+
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item d-flex align-items-center mx-2">
+          <a href="https://www.facebook.com/hassan.sabry.5/" title="facebook">
+            <i class="fab mx-2 fa-facebook"></i>
+          </a>
+          <a href="https://www.instagram.com/hassansabry0/" title="instagram">
+            <i class="fab mx-2 fa-instagram"></i>
+          </a>
+          <a
+            href="https://open.spotify.com/user/31tgtbr6firb3gionlf4zt45zwj4"
+            title="spotify"
+          >
+            <i class="fab mx-2 fa-spotify"></i>
+          </a>
+
+          <a href="https://soundcloud.com/hassan-sabry-5" title="soundcloud">
+            <i class="fab mx-2 fa-soundcloud"></i>
+          </a>
+        </li>
+        <li *ngIf="!isLogin" class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="register"
+            >Register</a
+          >
+        </li>
+        <li *ngIf="!isLogin" class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="login"
+            >Login</a
+          >
+        </li>
+
+        <li *ngIf="isLogin" class="nav-item">
+          <img
+            routerLink="profile"
+            routerLinkActive="active"
+            *ngIf="isLogin"
+            src="./../../../assets/images/2.png"
+            class="rounded-circle profile-nav"
+            alt=""
+            role="button"
+          />
+        </li>
+        <li
+          *ngIf="isLogin"
+          (click)="this._AuthService.logOut()"
+          class="nav-item"
+        >
+          <a class="nav-link" routerLinkActive="active" routerLink="logout"
+            >Logout</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- {{ _AuthService.getUserData() | json [first_] }} -->
